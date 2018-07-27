@@ -7,6 +7,7 @@ const track = {
     track: 'boston',
     tweet_mode: 'extended'
 }
+var sockets = [];
 
 export default function (app, io) {
 
@@ -14,10 +15,13 @@ export default function (app, io) {
     io.on('connection', (socket) => {
 
         console.log('User connected');
+        sockets.push(socket.id);
         stream.start();
         socket.on('disconnect', function () {
             console.log('User disconnected');
-            stream.stop();
+            sockets.splice(sockets.indexOf(socket.id), 1);
+            if (sockets.length == 0)
+                stream.stop();
         });
 
         stream.on('tweet', function (tweet) {
