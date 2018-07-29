@@ -1,0 +1,48 @@
+.banner {
+    background: linear-gradient(45deg, #2cb5e8, #47cf73);
+    color: white;
+}
+.progress-bar {
+    background-color: linear-gradient(45deg, #2cb5e8, #47cf73);
+}
+
+.tweet-container {
+    background: linear-gradient(45deg, #2cb5e8, #47cf73);
+    width: 100%;
+    height: 50vh;
+    border-radius: 25px;
+    overflow-y: hidden;
+    .tweet-nav {
+        height: 50vh;
+        overflow-y: scroll;
+        ul {
+            list-style-type: none;
+            padding: 5px;
+            width: 95%;
+            margin: auto auto;
+            padding-top: 15px;
+            display: table;
+            -webkit-transition:all 0.4s ease-out;
+            -moz-transition:all 0.4s ease-out;
+            -o-transition:all 0.4s ease-out;
+            transition:all 0.4s ease-out;
+    
+            li {
+                .tweet {
+                    border: solid;
+                    border-radius: 15px;
+                    border-width: 0 0 0 0;
+                    border-left-width: 4px;
+                    border-left-color: rgb(230, 214, 75);
+                    vertical-align: middle;
+                    background: white;
+                    margin-top: 4px;
+                    min-height: 2em;
+                    .text {
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -10,20 +10,21 @@ export class ApiService {
 
   private socket;
 
-  constructor() { 
-    
+  constructor() {
+
   }
-  
-  getTweets() {
+
+  getTweets(track) {
     this.socket = io('/');
     return Observable.create(observer => {
+      this.socket.emit('new-stream', track);
       this.socket.on('tweet', tweet => {
-        observer.next(tweet);    
+        observer.next(tweet);
       });
       return () => {
         this.socket.disconnect();
-      };  
-    })     
+      };
+    })
   }
 
 }

@@ -1,1 +1,40 @@
-Hi
+<div class="jumbotron text-center banner">
+  <h3>
+    <span>
+      <i class="glyphicon glyphicon-equalizer" aria-hidden="true"></i>
+    </span>
+    {{'Twitter Sentiment Analysis Demo' | uppercase }}
+  </h3>
+</div>
+<div class="container">
+  <form>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-search"></i>
+      </span>
+      <input id="search" type="text" class="form-control" name="search" placeholder="Search">
+    </div>
+  </form>
+  <br/>
+</div>
+
+<div class="container">
+  <p>
+    <ngb-progressbar class="index" showValue="false" type="success" [value]="value"></ngb-progressbar>
+  </p>
+</div>
+<div class="container">
+  <div class="tweet-container">
+    <div class="tweet-nav">
+      <ul>
+        <li *ngFor="let tweet of tweets">
+          <div class="tweet">
+            <p class="text">
+              {{tweet.text}}
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
