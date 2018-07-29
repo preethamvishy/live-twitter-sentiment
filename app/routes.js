@@ -3,32 +3,31 @@ var Twit = require('twit');
 import config from './config';
 
 var twitter = new Twit(config);
-const track = {
-    track: 'boston',
-    tweet_mode: 'extended'
-}
 var sockets = [];
 
 export default function (app, io) {
 
-    var stream = twitter.stream('statuses/filter', track);
+    var stream = null;
     io.on('connection', (socket) => {
 
         console.log('User connected');
         sockets.push(socket.id);
-        stream.start();
+
         socket.on('disconnect', function () {
             console.log('User disconnected');
             sockets.splice(sockets.indexOf(socket.id), 1);
-            if (sockets.length == 0)
+            if (sockets.length === 0 && stream !== null)
                 stream.stop();
         });
 
-        stream.on('tweet', function (tweet) {
-            console.log(tweet.user.id)
-            io.sockets.emit('tweet', tweet);
+        socket.on('new-stream', function (track) {
+            console.log(track)
+            stream = twitter.stream('statuses/filter', track);
+            stream.on('tweet', function (tweet) {
+                console.log(tweet.user.id)
+                socket.emit('tweet', tweet);
+            });
         });
-
     });
 
     app.get('*', (req, res) => {
