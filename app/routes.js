@@ -1,5 +1,6 @@
 const path = require('path');
 var Twit = require('twit');
+import nlp from './nlp';
 import config from './config';
 
 var twitter = new Twit(config);
@@ -25,6 +26,8 @@ export default function (app, io) {
             stream = twitter.stream('statuses/filter', track);
             stream.on('tweet', function (tweet) {
                 console.log(tweet.user.id)
+                var nlProcessedData = nlp(tweet);
+                tweet.nlprocessed = nlProcessedData;
                 socket.emit('tweet', tweet);
             });
         });

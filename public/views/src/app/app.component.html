@@ -19,9 +19,13 @@
 </div>
 
 <div class="container">
-  <p>
-    <ngb-progressbar class="index" showValue="false" type="success" [value]="value"></ngb-progressbar>
-  </p>
+  <div class="row">
+    <div *ngFor="let category of categories(count)" class="col-sm-4">
+      <p>
+        <ngb-progressbar class="index" type="success" height=".5rem" [value]="value(category)"></ngb-progressbar>
+      </p>
+    </div>
+  </div>
 </div>
 <div class="container">
   <div class="tweet-container">

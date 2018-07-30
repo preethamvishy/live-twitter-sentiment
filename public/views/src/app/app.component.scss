@@ -2,8 +2,8 @@
     background: linear-gradient(45deg, #2cb5e8, #47cf73);
     color: white;
 }
-.progress-bar {
-    background-color: linear-gradient(45deg, #2cb5e8, #47cf73);
+.progress-bar.bg-success {
+    background-color: red;
 }
 
 .tweet-container {
@@ -12,8 +12,10 @@
     height: 50vh;
     border-radius: 25px;
     overflow-y: hidden;
+    padding-top: 15px;
+    padding-bottom: 15px;
     .tweet-nav {
-        height: 50vh;
+        height: 100%;
         overflow-y: scroll;
         ul {
             list-style-type: none;
