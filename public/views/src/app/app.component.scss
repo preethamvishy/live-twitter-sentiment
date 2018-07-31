@@ -34,12 +34,17 @@
                     border: solid;
                     border-radius: 15px;
                     border-width: 0 0 0 0;
-                    border-left-width: 4px;
-                    border-left-color: rgb(230, 214, 75);
                     vertical-align: middle;
                     background: white;
                     margin-top: 4px;
                     min-height: 2em;
+                    .category-icon {
+                        font-size: 1.5em;
+                        padding: 0;
+                        margin: 0;
+                        margin-left: 0.5em;
+                        padding-right: 0.5em;
+                    }
                     .text {
                         padding: 10px;
                     }
@@ -47,4 +52,24 @@
             }
         }
     }
+}
+.score-card {
+    font-size: 4rem;
+    .category-icon{
+        border-right: 1px solid rgb(145, 145, 145);
+        
+    }
+    .category-score {
+        width: 3rem;
+        padding-left: 1rem;
+    }
+}
+.happy {
+    color: #47cf73
+}
+.unhappy {
+    color: #d81858
+}
+.neutral {
+    color: #1a94c0
 }

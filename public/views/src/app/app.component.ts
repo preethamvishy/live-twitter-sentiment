@@ -8,9 +8,7 @@ import { ApiService } from '../services/api.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  categories = function(categories){
-    return Object.keys(categories).filter(category => category !== 'total');
-  }
+  keys = Object.keys;
   
   subscriber;
   tweets = [];
@@ -20,12 +18,26 @@ export class AppComponent implements OnInit, OnDestroy {
   };
   happyThreshold = 2;
   unhappyThreshold = -1;
-  count = {
+  categories = {
     happy: 0,
     neutral: 0,
     unhappy: 0,
-    total: 0
   };
+  totalCount = 0;
+  styles = {
+    happy: {
+      class: 'fas fa-smile-beam',
+      color: '#47cf73'
+    },
+    neutral: {
+      class: 'fas fa-meh',
+      color: '#1a94c0',
+    },
+    unhappy: {
+      class: 'fas fa-frown-open',
+      color: '#d81858'
+    }
+  }
 
   constructor(private api: ApiService) {
   }
@@ -45,24 +57,26 @@ export class AppComponent implements OnInit, OnDestroy {
   categorizeTweet(tweet) {
     if(tweet.nlprocessed.score >= this.happyThreshold) 
     {
-      this.count.happy++;
+      this.categories.happy++;
       tweet.category = 'happy';
     }
     else if(tweet.nlprocessed.score <= this.unhappyThreshold) 
     {
-      this.count.unhappy++;
+      this.categories.unhappy++;
       tweet.category = 'unhappy';
     }
     else
     {
-      this.count.neutral++;
+      this.categories.neutral++;
       tweet.category = 'neutral';
     }
-    this.count.total++;
+    this.totalCount++;
     return tweet;
   }
   value(category) {
-    return Math.round(this.count[category] * 100 / this.count.total);
+    if(this.totalCount > 0)
+      return Math.round(this.categories[category] * 100 / this.totalCount);
+    return 0;
 
   }
 }

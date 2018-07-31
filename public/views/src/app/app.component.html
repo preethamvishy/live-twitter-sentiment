@@ -20,7 +20,13 @@
 
 <div class="container">
   <div class="row">
-    <div *ngFor="let category of categories(count)" class="col-sm-4">
+    <div *ngFor="let category of keys(categories)" class="col-sm-4">
+      <div class="row text-center score-card">
+        <span class="category-icon" [style.color]="styles[category].color">
+          <i [ngClass]="styles[category].class"></i>
+        </span>
+        <span class="category-score">{{value(category)}}%</span>
+      </div>
       <p>
         <ngb-progressbar class="index" type="success" height=".5rem" [value]="value(category)"></ngb-progressbar>
       </p>
@@ -33,6 +39,11 @@
       <ul>
         <li *ngFor="let tweet of tweets">
           <div class="tweet">
+            <div>
+              <span class="category-icon pull-left" [style.color]="styles[tweet.category].color">
+                <i [ngClass]="styles[tweet.category].class"></i>
+              </span>
+            </div>
             <p class="text">
               {{tweet.text}}
             </p>
