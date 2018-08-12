@@ -61,4 +61,4 @@ typings/
 .next
 package-lock.json
 */dist/*
-app/config.js
+
