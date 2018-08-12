@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js",
+    "start": "babel-node server.js",
     "postinstall": "npm install -g babel-cli"
   },
   "keywords": [],
