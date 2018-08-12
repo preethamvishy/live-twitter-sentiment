@@ -2,9 +2,10 @@
   "name": "visualization-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "nodemon --exec babel-node server.js",
+    "postinstall": "npm install -g babel-cli"
   },
   "keywords": [],
   "author": "Preetham Viswanathan",
@@ -15,10 +16,10 @@
     "express": "^4.16.3",
     "sentiment": "^5.0.1",
     "socket.io": "^2.1.1",
-    "twit": "^2.2.11"
-  },
-  "devDependencies": {
+    "twit": "^2.2.11",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1"
+  },
+  "devDependencies": {
   }
 }

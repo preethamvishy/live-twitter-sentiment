@@ -19,5 +19,6 @@ app.use(cors());
 routes(app);
 socketManager(io);
 
-server.listen(PORT);
+app.set('port', PORT);
+server.listen(app.get('port'));
 console.log('Running on port ' + PORT);
