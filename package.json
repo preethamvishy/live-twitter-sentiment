@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node server.js",
-    "postinstall": "npm install -g babel-cli"
+    "postinstall": "npm install -g babel-cli && cd public/views/ && npm install"
   },
   "keywords": [],
   "author": "Preetham Viswanathan",
