@@ -7,15 +7,17 @@ const http = require('http');
 const server = http.createServer(app);
 var io = require('socket.io').listen(server);
 import routes from './app/routes';
+import socketManager from './app/socket-manager';
 
-var PORT = process.env.PORT || 4000;
+var PORT = process.env.PORT || 4002;
 
 
 app.use(express.static(path.join(__dirname, 'public/dist')));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 
-routes(app, io);
+routes(app);
+socketManager(io);
 
 server.listen(PORT);
 console.log('Running on port ' + PORT);
