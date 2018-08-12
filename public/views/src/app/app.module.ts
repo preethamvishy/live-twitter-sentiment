@@ -10,7 +10,7 @@ import { APP_ROUTES } from './app-routes';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxChartsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(APP_ROUTES),

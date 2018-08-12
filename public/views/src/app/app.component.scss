@@ -12,7 +12,7 @@
     height: 50vh;
     border-radius: 25px;
     overflow-y: hidden;
-    padding-top: 15px;
+    // padding-top: 15px;
     padding-bottom: 15px;
     .tweet-nav {
         height: 100%;
@@ -28,25 +28,32 @@
             -moz-transition:all 0.4s ease-out;
             -o-transition:all 0.4s ease-out;
             transition:all 0.4s ease-out;
-    
+
             li {
+                margin-bottom: 0.5rem;
                 .tweet {
                     border: solid;
                     border-radius: 15px;
                     border-width: 0 0 0 0;
-                    vertical-align: middle;
+                    display: table;
                     background: white;
                     margin-top: 4px;
                     min-height: 2em;
                     .category-icon {
-                        font-size: 1.5em;
-                        padding: 0;
-                        margin: 0;
-                        margin-left: 0.5em;
-                        padding-right: 0.5em;
+                        font-size: 1.5rem;
+                        width: 2rem;
+                        padding: 0.25rem;
+                        padding-left: 1rem;
+                        display: table-cell;
+                        vertical-align: middle;
+                        position:relative;
                     }
                     .text {
+                        display: table-cell;
+                        width: 100%;
+                        vertical-align: middle;
                         padding: 10px;
+                        padding-left: 1.25rem;
                     }
                 }
             }

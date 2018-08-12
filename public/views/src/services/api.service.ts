@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 
@@ -9,14 +8,15 @@ import * as io from 'socket.io-client';
 export class ApiService {
 
   private socket;
+  private Observer;
 
   constructor() {
-
+    
   }
 
   getTweets(track) {
     this.socket = io('/');
-    return Observable.create(observer => {
+    this.Observer = Observable.create(observer => {
       this.socket.emit('new-stream', track);
       this.socket.on('tweet', tweet => {
         observer.next(tweet);
@@ -25,6 +25,12 @@ export class ApiService {
         this.socket.disconnect();
       };
     })
+    return this.Observer;
+  }
+
+  stopStream() {
+    this.socket.emit('stop-stream');
+
   }
 
 }

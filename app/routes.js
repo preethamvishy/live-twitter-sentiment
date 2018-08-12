@@ -4,20 +4,17 @@ import nlp from './nlp';
 import config from './config';
 
 var twitter = new Twit(config);
-var sockets = [];
 
 export default function (app, io) {
 
-    var stream = null;
     io.on('connection', (socket) => {
 
+        var stream = null;
         console.log('User connected');
-        sockets.push(socket.id);
 
         socket.on('disconnect', function () {
             console.log('User disconnected');
-            sockets.splice(sockets.indexOf(socket.id), 1);
-            if (sockets.length === 0 && stream !== null)
+            if (stream !== null && stream !== undefined)
                 stream.stop();
         });
 
@@ -25,11 +22,17 @@ export default function (app, io) {
             console.log(track)
             stream = twitter.stream('statuses/filter', track);
             stream.on('tweet', function (tweet) {
-                console.log(tweet.user.id)
                 var nlProcessedData = nlp(tweet);
                 tweet.nlprocessed = nlProcessedData;
                 socket.emit('tweet', tweet);
             });
+        });
+
+        socket.on('stop-stream', function (track) {
+            console.log('stop stream event')
+            if (stream !== null && stream !== undefined)
+                stream.stop();
+            socket.disconnect();
         });
     });
 
