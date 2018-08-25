@@ -3,5 +3,5 @@ export default {
     consumer_secret: process.env.consumer_secret,
     access_token: process.env.access_token,
     access_token_secret: process.env.access_token_secret,
-    timeout_ms = 60 * 1000
+    timeout_ms: 60 * 1000
 }
