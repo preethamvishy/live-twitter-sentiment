@@ -1,82 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 .banner {
     background: linear-gradient(45deg, #2cb5e8, #47cf73);
     color: white;
-}
-.progress-bar.bg-success {
-    background-color: red;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .tweet-container {
-    background: linear-gradient(45deg, #2cb5e8, #47cf73);
-    width: 100%;
-    height: 50vh;
-    border-radius: 25px;
-    overflow-y: hidden;
-    // padding-top: 15px;
-    padding-bottom: 15px;
-    .tweet-nav {
-        height: 100%;
-        overflow-y: scroll;
-        ul {
-            list-style-type: none;
-            padding: 5px;
-            width: 95%;
-            margin: auto auto;
-            padding-top: 15px;
-            display: table;
-            -webkit-transition:all 0.4s ease-out;
-            -moz-transition:all 0.4s ease-out;
-            -o-transition:all 0.4s ease-out;
-            transition:all 0.4s ease-out;
+    height: 60vh;
+    overflow: scroll;
+    word-break: break-all;
+    border: 4px solid white;
+}
 
-            li {
-                margin-bottom: 0.5rem;
-                .tweet {
-                    border: solid;
-                    border-radius: 15px;
-                    border-width: 0 0 0 0;
-                    display: table;
-                    background: white;
-                    margin-top: 4px;
-                    min-height: 2em;
-                    .category-icon {
-                        font-size: 1.5rem;
-                        width: 2rem;
-                        padding: 0.25rem;
-                        padding-left: 1rem;
-                        display: table-cell;
-                        vertical-align: middle;
-                        position:relative;
-                    }
-                    .text {
-                        display: table-cell;
-                        width: 100%;
-                        vertical-align: middle;
-                        padding: 10px;
-                        padding-left: 1.25rem;
-                    }
-                }
-            }
-        }
-    }
+.text-white-50 { color: rgba(255, 255, 255, .5); }
+
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.lh-100 { line-height: 1; }
+.lh-125 { line-height: 1.25; }
+.lh-150 { line-height: 1.5; }
+
+.jumbotron {
+    margin-bottom: 0;
+    max-height: 20vh;
 }
-.score-card {
-    font-size: 4rem;
-    .category-icon{
-        border-right: 1px solid rgb(145, 145, 145);
-        
-    }
-    .category-score {
-        width: 3rem;
-        padding-left: 1rem;
-    }
+.container-fluid {
+    padding-top: 15px;
+    min-height: 80vh;
 }
-.happy {
-    color: #47cf73
+
+.category-icon {
+    padding-right: 0.5em;
+    margin-right: 0.5em;
 }
-.unhappy {
-    color: #d81858
+
+.media-body {
+    min-height: 52px;
 }
-.neutral {
-    color: #1a94c0
+
+.summary {
+    padding: 0.5em;
+    padding-bottom: 0.2em;
 }

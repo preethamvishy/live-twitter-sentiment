@@ -10,31 +10,35 @@ import { NgForm } from '@angular/forms';
 export class AppComponent implements OnInit, OnDestroy {
 
   keys = Object.keys;
-  
+
   subscriber;
-  tweets = [];
+  tweets = [[], [], []];
+
   track = {
     track: 'Boston',
     tweet_mode: 'extended'
   };
+
   happyThreshold = 2;
   unhappyThreshold = -1;
-  categories
+  categories;
   totalCount;
+
   styles = {
-    happy: {
+    0: {
       class: 'fas fa-smile-beam',
       color: '#47cf73'
     },
-    neutral: {
+    1: {
       class: 'fas fa-meh',
       color: '#1a94c0',
     },
-    unhappy: {
+    2: {
       class: 'fas fa-frown-open',
       color: '#d81858'
     }
   }
+
   searchStr = 'Boston';
 
   constructor(private api: ApiService) {
@@ -52,46 +56,44 @@ export class AppComponent implements OnInit, OnDestroy {
   resetCategories() {
     this.totalCount = 0;
     this.categories = {
-      happy: 0,
-      neutral: 0,
-      unhappy: 0,
+      0: 0,
+      1: 0,
+      2: 0,
     };
   }
-  
+
   addNewTweet(tweet) {
-    console.log(tweet);
-    this.tweets.splice(0, 0, this.categorizeTweet(tweet));
+    this.categorizeTweet(tweet);
   }
   categorizeTweet(tweet) {
-    if(tweet.nlprocessed.score >= this.happyThreshold) 
-    {
-      this.categories.happy++;
-      tweet.category = 'happy';
+    if (tweet.nlprocessed.score >= this.happyThreshold) {
+      this.categories[0]++;
+      this.tweets[0].splice(0, 0, tweet);
     }
-    else if(tweet.nlprocessed.score <= this.unhappyThreshold) 
-    {
-      this.categories.unhappy++;
-      tweet.category = 'unhappy';
+    else if (tweet.nlprocessed.score <= this.unhappyThreshold) {
+      this.categories[1]++;
+      this.tweets[1].splice(0, 0, tweet);
     }
-    else
-    {
-      this.categories.neutral++;
+    else {
+      this.categories[2]++;
       tweet.category = 'neutral';
+      this.tweets[2].splice(0, 0, tweet);
     }
     this.totalCount++;
-    return tweet;
   }
+
   value(category) {
-    if(this.totalCount > 0)
+    if (this.totalCount > 0) {
       return Math.floor(this.categories[category] * 100 / this.totalCount);
+    }
     return 0;
   }
-  newTracker(searchStr)
-  {
+
+  newTracker(searchStr) {
     console.log(searchStr);
     this.resetCategories();
     this.api.stopStream();
-    this.tweets = [];
+    this.tweets = [[], [], []];
     this.track = {
       track: searchStr,
       tweet_mode: 'extended'
