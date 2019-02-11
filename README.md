@@ -3,7 +3,3 @@ A live searchable twitter sentiment analyzer built with Twitter API and Web Sock
 
 ![](https://snag.gy/HJ5NvM.jpg)
 
-Head over to https://visualization-demo.herokuapp.com/ to test.
-
-
-
