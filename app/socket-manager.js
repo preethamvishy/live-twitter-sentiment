@@ -5,7 +5,7 @@ import config from './config';
 var twitter = new Twit(config);
 
 
-export default function(io) {
+export default function (io) {
     io.on('connection', (socket) => {
 
         var stream = null;
@@ -21,9 +21,11 @@ export default function(io) {
             console.log(track)
             stream = twitter.stream('statuses/filter', track);
             stream.on('tweet', function (tweet) {
-                var nlProcessedData = nlp(tweet);
-                tweet.nlprocessed = nlProcessedData;
-                socket.emit('tweet', tweet);
+                nlp(tweet).then( nlProcessedData => {
+                    tweet.nlprocessed = nlProcessedData;
+                    socket.emit('tweet', tweet);
+                })
+                .catch(err => console.log(err))
             });
         });
 

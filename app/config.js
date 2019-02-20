@@ -1,3 +1,4 @@
+require('dotenv').config();
 export default {
     consumer_key: process.env.consumer_key,
     consumer_secret: process.env.consumer_secret,

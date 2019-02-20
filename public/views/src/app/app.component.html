@@ -1,11 +1,10 @@
 <body>
-  <div class="jumbotron text-center banner">
-    <h3>
-      <span>
-        <i class="far fa-chart-bar"></i>
-      </span>
-      {{'Twitter Sentiment Analysis Demo' | uppercase }}
-    </h3>
+  <div class="navbar navbar-expand-lg banner">
+    <a href="/" class="navbar-brand justify-content-start">
+      <i class="far fa-chart-bar"></i>
+      LIVER
+    </a>
+    <small>{{'Live Twitter Sentiment Analysis' }}</small>
   </div>
 
   <div class="bg-light container-fluid h-100">
@@ -24,23 +23,29 @@
         </form>
       </div>
     </div>
+    <br />
     <div class="row" *ngIf="totalCount > 0">
-      <div *ngFor="let columnCategory of ['Negative', 'Neutral', 'Positive']; let i = index" class="col-sm-4 text-center">
-        <h1 class="summary">
-          <i [ngClass]="styles[i].class" [style.color]="styles[i].color" class="border-right category-icon"></i>
-          <span class="category-score">{{value(i)}}%</span>
-        </h1>
-        <ngb-progressbar class="index" type="success" height=".5rem" [value]="value(i)" [style.color]="styles[i].color"></ngb-progressbar>
+      <div *ngFor="let columnCategory of ['Joy', 'Sadness', 'Anger']; let i = index"
+        class="col-sm-12 col-md-4 col-lg-4 text-center">
+        <div class="my-3 p-3 bg-white rounded box-shadow">
+          <h1 class="summary">
+            <i [ngClass]="styles[i].class" [style.color]="styles[i].color" class="border-right category-icon"></i>
+            <span class="category-score">{{value(i)}}%</span>
+          </h1>
+          <ngb-progressbar class="index" type="success" height=".5rem" [value]="value(i)"
+            [style.color]="styles[i].color"></ngb-progressbar>
+        </div>
       </div>
     </div>
     <div class="row" *ngIf="totalCount > 0">
-      <div *ngFor="let columnCategory of ['Negative', 'Neutral', 'Positive']; let i = index" class="col-sm-4">
+      <div *ngFor="let columnCategory of ['Joy', 'Sadness', 'Anger']; let i = index"
+        class="col-sm-12 col-md-4 col-lg-4">
         <div class="my-3 p-3 bg-white rounded box-shadow tweet-container">
           <div *ngFor="let tweet of tweets[i]" class="media text-muted pt-3">
             <img class="mr-2 rounded" [src]="tweet.user.profile_image_url_https">
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark"><a [href]="'https://twitter/' + tweet.user.screen_name" target="_blank"
-                  class="text-secondary">@{{tweet.user.screen_name}}</a></strong>
+              <strong class="d-block text-gray-dark"><a [href]="'https://twitter/' + tweet.user.screen_name"
+                  target="_blank" class="text-secondary">@{{tweet.user.screen_name}}</a></strong>
               {{tweet.text}}
             </p>
           </div>

@@ -1,5 +1,5 @@
 {
-  "name": "visualization-demo",
+  "name": "live-twitter-sentiment",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -11,15 +11,16 @@
   "author": "Preetham Viswanathan",
   "license": "MIT",
   "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "sentiment": "^5.0.1",
     "socket.io": "^2.1.1",
     "twit": "^2.2.11",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1"
+    "watson-developer-cloud": "^3.18.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

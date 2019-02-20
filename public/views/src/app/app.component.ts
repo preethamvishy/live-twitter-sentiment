@@ -19,8 +19,6 @@ export class AppComponent implements OnInit, OnDestroy {
     tweet_mode: 'extended'
   };
 
-  happyThreshold = 2;
-  unhappyThreshold = -1;
   categories;
   totalCount;
 
@@ -29,13 +27,13 @@ export class AppComponent implements OnInit, OnDestroy {
       class: 'fas fa-smile-beam',
       color: '#47cf73'
     },
-    1: {
-      class: 'fas fa-meh',
-      color: '#1a94c0',
-    },
     2: {
+      class: 'fas fa-angry',
+      color: '#d81858',
+    },
+    1: {
       class: 'fas fa-frown-open',
-      color: '#d81858'
+      color: '#1a94c0'
     }
   }
 
@@ -66,18 +64,23 @@ export class AppComponent implements OnInit, OnDestroy {
     this.categorizeTweet(tweet);
   }
   categorizeTweet(tweet) {
-    if (tweet.nlprocessed.score >= this.happyThreshold) {
+    var emotions = tweet.nlprocessed.document_tone.tone_categories[0].tones;
+
+    const dominantEmotion = emotions.reduce(function (first, second) {
+      return (first.score > second.score) ? first : second
+    })
+
+    if (dominantEmotion.tone_id == 'joy') {
       this.categories[0]++;
       this.tweets[0].splice(0, 0, tweet);
     }
-    else if (tweet.nlprocessed.score <= this.unhappyThreshold) {
-      this.categories[1]++;
-      this.tweets[1].splice(0, 0, tweet);
+    else if (['anger', 'disgust'].indexOf(dominantEmotion.tone_id) > -1) {
+      this.categories[2]++;
+      this.tweets[2].splice(0, 0, tweet);
     }
     else {
-      this.categories[2]++;
-      tweet.category = 'neutral';
-      this.tweets[2].splice(0, 0, tweet);
+      this.categories[1]++;
+      this.tweets[1].splice(0, 0, tweet);
     }
     this.totalCount++;
   }
