@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "8.9.3"
+  },
   "scripts": {
     "start": "babel-node server.js",
     "postinstall": "npm install -g babel-cli && cd public/views/ && npm install"

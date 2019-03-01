@@ -93,7 +93,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.tweets[2].splice(0, 0, tweet);
       if (this.mostNegative.dominantEmotion.score < dominantEmotion.score) {
         this.mostNegative = tweet;
-        console.log(this.mostNegative['text'])
         this.mostNegative.dominantEmotion = dominantEmotion;
       }
     }
@@ -102,7 +101,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.tweets[1].splice(0, 0, tweet);
       if (this.mostNegative.dominantEmotion.score < dominantEmotion.score) {
         this.mostNegative = tweet;
-        console.log(this.mostNegative['text'])
         this.mostNegative.dominantEmotion = dominantEmotion;
       }
 

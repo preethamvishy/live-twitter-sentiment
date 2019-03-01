@@ -32,7 +32,7 @@
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.2.2",
     "socket.io-client": "^2.1.1",
-    "typescript": "^2.9.2",
+    "typescript": "^2.6.2",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
