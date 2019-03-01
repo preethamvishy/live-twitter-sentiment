@@ -42,12 +42,14 @@ export class AppComponent implements OnInit, OnDestroy {
   mostPositive = {
     dominantEmotion: {
       score: 0
-    }
+    },
+    text: ''
   };
   mostNegative = {
     dominantEmotion: {
       score: 0
-    }
+    },
+    text: ''
   };
 
   constructor(private api: ApiService) {
