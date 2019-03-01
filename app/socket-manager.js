@@ -25,7 +25,10 @@ export default function (io) {
                     tweet.nlprocessed = nlProcessedData;
                     socket.emit('tweet', tweet);
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    tweet.watsonError = err;
+                    socket.emit('tweet', tweet);
+                })
             });
         });
 

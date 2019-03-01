@@ -15,8 +15,9 @@ export default async function (obj) {
             sentences: false
         };
         toneAnalyzer.tone(toneParams, function (err, toneAnalysis) {
-            if (err)
+            if (err) {
                 reject(err);
+            }
             else
                 resolve(toneAnalysis);
         });
