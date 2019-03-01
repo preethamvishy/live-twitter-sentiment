@@ -29,8 +29,8 @@ export class ApiService {
   }
 
   stopStream() {
-    this.socket.emit('stop-stream');
-
+    if(this.socket)
+      this.socket.emit('stop-stream');
   }
 
 }

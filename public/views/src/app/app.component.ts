@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { NgForm } from '@angular/forms';
+declare var $;
 
 @Component({
   selector: 'app-root',
@@ -38,15 +39,23 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   searchStr = 'Boston';
+  mostPositive = {
+    dominantEmotion: {
+      score: 0
+    }
+  };
+  mostNegative = {
+    dominantEmotion: {
+      score: 0
+    }
+  };
 
   constructor(private api: ApiService) {
   }
 
   ngOnInit() {
     this.resetCategories();
-    this.subscriber = this.api.getTweets(this.track).subscribe(newTweet => {
-      this.addNewTweet(newTweet);
-    });
+    this.newTracker(this.searchStr);
   }
   ngOnDestroy() {
     this.subscriber.unsubscribe();
@@ -73,14 +82,30 @@ export class AppComponent implements OnInit, OnDestroy {
     if (dominantEmotion.tone_id == 'joy') {
       this.categories[0]++;
       this.tweets[0].splice(0, 0, tweet);
+      if (this.mostPositive.dominantEmotion.score < dominantEmotion.score) {
+        this.mostPositive = tweet;
+        this.mostPositive.dominantEmotion = dominantEmotion;
+      }
+
     }
     else if (['anger', 'disgust'].indexOf(dominantEmotion.tone_id) > -1) {
       this.categories[2]++;
       this.tweets[2].splice(0, 0, tweet);
+      if (this.mostNegative.dominantEmotion.score < dominantEmotion.score) {
+        this.mostNegative = tweet;
+        console.log(this.mostNegative['text'])
+        this.mostNegative.dominantEmotion = dominantEmotion;
+      }
     }
     else {
       this.categories[1]++;
       this.tweets[1].splice(0, 0, tweet);
+      if (this.mostNegative.dominantEmotion.score < dominantEmotion.score) {
+        this.mostNegative = tweet;
+        console.log(this.mostNegative['text'])
+        this.mostNegative.dominantEmotion = dominantEmotion;
+      }
+
     }
     this.totalCount++;
   }
@@ -102,7 +127,21 @@ export class AppComponent implements OnInit, OnDestroy {
       tweet_mode: 'extended'
     };
     this.subscriber = this.api.getTweets(this.track).subscribe(newTweet => {
-      this.addNewTweet(newTweet);
+      if (newTweet.watsonError) {
+        $("#error").modal("toggle");
+        this.api.stopStream();
+        this.subscriber.unsubscribe();
+      }
+      else
+        this.addNewTweet(newTweet);
+
+      console.log(newTweet)
+
     });
+
+  }
+
+  getImageUrl(tweet) {
+    return (tweet.user.profile_image_url_https).replace('_normal', '');
   }
 }
