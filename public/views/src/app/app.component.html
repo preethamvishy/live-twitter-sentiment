@@ -23,82 +23,102 @@
         </form>
       </div>
     </div>
-    <div class="row" *ngIf="mostPositive.text.length > 0 && mostNegative.text.length > 0">
-      <div class="col-6">
-        <div class="my-3 p-3 bg-white rounded box-shadow">
-          <p class="border-bottom border-gray box-header">
-            Most Positive Tweet
-          </p>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12 col-lg-4 col-md-6 text-center">
-                <img [src]="getImageUrl(mostPositive)" class="mx-auto rounded-circle img-fluid">
-                <br>
-              </div>
-              <div class="col-12 col-lg-8 col-md-6">
-                <p class="lead"><a [href]="'https://twitter.com/' + mostPositive.user.screen_name" target="_blank"
-                    class="text-secondary">@{{mostPositive.user.screen_name}}</a>
-                </p>
-                <p class="most-body">
-                  {{mostPositive.text}}
-                </p>
-                <div class="row">
-                  <div class="col-6">
-                    <h3 class="mb-0">
-                      {{mostPositive.retweet_count}}
-                    </h3>
-                    <small>Retweets</small>
-                  </div>
-                  <div class="col-6">
-                    <h3 class="mb-0">
-                      {{mostPositive.favorite_count}}
-                    </h3>
-                    <small>Likes</small>
-                  </div>
-                </div>
-              </div>
+
+    <div class="row"
+      *ngIf="mostPositive.text.length > 0 && mostNegative.text.length > 0 && influentialNegative.text.length > 0 && influentialPositive.text.length > 0">
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="card tweet-card box-shadow">
+          <div class="card-img-top">
+          </div>
+          <div class="card-block text-center">
+            <img class="card-img-profile rounded-circle" [src]="getImageUrl(mostPositive)">
+            <div class="card-title">
+              <p class="font-weight-bold text-secondary">{{'Most Positive Tweet' | uppercase}}</p>
+              <a [href]="'https://twitter.com/' + mostPositive.user.screen_name" target="_blank" class="text-secondary">
+                @{{mostPositive.user.screen_name}}
+              </a>
+              <p class="most-body">
+                {{mostPositive.text }}
+              </p>
+            </div>
+            <div class="card-links">
+              <span class="retweets"><i class="fas fa-retweet"></i>{{mostPositive.retweet_count}}</span>
+              <span class="likes"> <i class="far fa-heart"></i>{{mostPositive.favorite_count}}</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-6">
-        <div class="my-3 p-3 bg-white rounded box-shadow">
-          <p class="border-bottom border-gray box-header">
-            Most Negative Tweet
-          </p>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12 col-lg-4 col-md-6 text-center">
-                <img [src]="getImageUrl(mostNegative)" class="mx-auto rounded-circle img-fluid">
-                <br>
-              </div>
-              <div class="col-12 col-lg-8 col-md-6">
-                <p class="lead"><a [href]="'https://twitter.com/' + mostNegative.user.screen_name" target="_blank"
-                    class="text-secondary">@{{mostNegative.user.screen_name}}</a>
-                </p>
-                <p class="most-body">
-                  {{mostNegative.text }}
-                </p>
-                <div class="row">
-                  <div class="col-6">
-                    <h3 class="mb-0">
-                      {{mostNegative.retweet_count}}
-                    </h3>
-                    <small>Retweets</small>
-                  </div>
-                  <div class="col-6">
-                    <h3 class="mb-0">
-                      {{mostNegative.favorite_count}}
-                    </h3>
-                    <small>Likes</small>
-                  </div>
-                </div>
-              </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="card tweet-card box-shadow">
+          <div class="card-img-top">
+          </div>
+          <div class="card-block text-center">
+            <img class="card-img-profile rounded-circle" [src]="getImageUrl(mostNegative)">
+            <div class="card-title">
+              <p class="font-weight-bold text-secondary">{{'Most Negative Tweet' | uppercase}}</p>
+              <a [href]="'https://twitter.com/' + mostNegative.user.screen_name" target="_blank" class="text-secondary">
+                @{{mostNegative.user.screen_name}}
+              </a>
+              <p class="most-body">
+                {{mostNegative.text }}
+              </p>
+            </div>
+            <div class="card-links">
+              <span class="retweets"><i class="fas fa-retweet"></i>{{mostNegative.retweet_count}}</span>
+              <span class="likes"> <i class="far fa-heart"></i>{{mostNegative.favorite_count}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="card tweet-card box-shadow">
+          <div class="card-img-top">
+          </div>
+          <div class="card-block text-center">
+            <img class="card-img-profile rounded-circle" [src]="getImageUrl(influentialPositive)">
+            <div class="card-title">
+              <p class="font-weight-bold text-secondary">{{'Most Influential Positive Tweet' | uppercase}}</p>
+              <a [href]="'https://twitter.com/' + influentialPositive.user.screen_name" target="_blank"
+                class="text-secondary">
+                @{{influentialPositive.user.screen_name}}
+              </a>
+              <p class="most-body">
+                {{influentialPositive.text }}
+              </p>
+            </div>
+            <div class="card-links">
+              <span class="retweets"><i class="fas fa-retweet"></i>{{influentialPositive.retweet_count}}</span>
+              <span class="likes"> <i class="far fa-heart"></i>{{influentialPositive.favorite_count}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="card tweet-card box-shadow">
+          <div class="card-img-top">
+          </div>
+          <div class="card-block text-center">
+            <img class="card-img-profile rounded-circle" [src]="getImageUrl(influentialNegative)">
+            <div class="card-title">
+              <p class="font-weight-bold text-secondary">{{'Most Influential Negative Tweet' | uppercase}}</p>
+              <a [href]="'https://twitter.com/' + influentialNegative.user.screen_name" target="_blank"
+                class="text-secondary">
+                @{{influentialNegative.user.screen_name}}
+              </a>
+              <p class="most-body">
+                {{influentialNegative.text}}
+              </p>
+            </div>
+            <div class="card-links">
+              <span class="retweets"><i class="fas fa-retweet"></i>{{influentialNegative.retweet_count}}</span>
+              <span class="likes"> <i class="far fa-heart"></i>{{influentialNegative.favorite_count}}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
     <div class="row" *ngIf="totalCount > 0">
       <div *ngFor="let columnCategory of ['Positive', 'Negative', 'Angry']; let i = index"
         class="col-sm-12 col-md-4 col-lg-4">

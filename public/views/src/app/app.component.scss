@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+$likes-color: #ea4b89;
+$retweets-color: #68aade;
 
 .banner {
     background: linear-gradient(45deg, #2cb5e8, #47cf73);
@@ -29,10 +31,6 @@
     }
 }
 
-.most-body {
-    height: 100px;
-    overflow: scroll;
-}
 .text-white-50 { color: rgba(255, 255, 255, .5); }
 
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
@@ -60,4 +58,65 @@
 .summary {
     padding: 0.5em;
     padding-bottom: 0.2em;
+}
+
+.tweet-card {
+    margin-top: 150px;
+    border-radius: 0;
+    border: 0;
+    padding: 1em;
+
+    .card-img-top {
+        border-radius: 0;
+    }
+
+    .card-img-profile {
+        width: 50%;
+        height: 50%;
+        max-width: 50%;
+        max-height: 50%;
+        border-radius: 50%;
+        margin-top: -95px;
+        margin-bottom: 35px;
+        border: 5px solid white;
+    }
+
+    .card-title {
+        margin-bottom: 50px;
+
+
+    }
+    .most-body {
+        height: 100px;
+        overflow: scroll;
+        margin: auto;
+        padding: 10px;
+    }
+  
+    .card-links {
+        margin-bottom: 25px;
+        
+        .retweets {
+            color: $likes-color;
+            font-weight: bold;
+            padding: 1em;
+            &:hover {
+                color: darken($likes-color, 10%);
+            }
+            .fas, .far {
+                padding-right: 0.5em;
+            }
+        }
+        
+        .likes {
+            color: $retweets-color;
+            padding: 1em;
+            &:hover {
+                color: darken($retweets-color, 10%);
+            }
+            .fas, .far {
+                padding-right: 0.5em;
+            }
+        }
+    }
 }

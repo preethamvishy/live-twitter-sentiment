@@ -51,6 +51,16 @@ export class AppComponent implements OnInit, OnDestroy {
     },
     text: ''
   };
+  influentialPositive = {
+    retweet_count: -1,
+    favorite_count: -1,
+    text: ''
+  };
+  influentialNegative = {
+    retweet_count: -1,
+    favorite_count: -1,
+    text: ''
+  };
 
   constructor(private api: ApiService) {
   }
@@ -74,9 +84,16 @@ export class AppComponent implements OnInit, OnDestroy {
   addNewTweet(tweet) {
     this.categorizeTweet(tweet);
   }
-  categorizeTweet(tweet) {
-    var emotions = tweet.nlprocessed.document_tone.tone_categories[0].tones;
 
+  categorizeTweet(tweet) {
+    var incomingTweet = tweet;
+    while (incomingTweet.retweeted_status != null && incomingTweet.retweeted_status != undefined)
+      incomingTweet = incomingTweet.retweeted_status;
+
+    if (incomingTweet.extended_tweet != null && incomingTweet.extended_tweet != undefined)
+      incomingTweet.text = incomingTweet.extended_tweet.full_text;
+
+    var emotions = tweet.nlprocessed.document_tone.tone_categories[0].tones;
     const dominantEmotion = emotions.reduce(function (first, second) {
       return (first.score > second.score) ? first : second
     })
@@ -88,24 +105,28 @@ export class AppComponent implements OnInit, OnDestroy {
         this.mostPositive = tweet;
         this.mostPositive.dominantEmotion = dominantEmotion;
       }
-
-    }
-    else if (['anger', 'disgust'].indexOf(dominantEmotion.tone_id) > -1) {
-      this.categories[2]++;
-      this.tweets[2].splice(0, 0, tweet);
-      if (this.mostNegative.dominantEmotion.score < dominantEmotion.score) {
-        this.mostNegative = tweet;
-        this.mostNegative.dominantEmotion = dominantEmotion;
+      if (this.influentialPositive.retweet_count + this.influentialPositive.favorite_count < incomingTweet.retweet_count + incomingTweet.favorite_count) {
+        this.influentialPositive = incomingTweet;
       }
     }
     else {
-      this.categories[1]++;
-      this.tweets[1].splice(0, 0, tweet);
+      if (['anger', 'disgust'].indexOf(dominantEmotion.tone_id) > -1) {
+        this.categories[2]++;
+        this.tweets[2].splice(0, 0, tweet);
+      }
+      else {
+        this.categories[1]++;
+        this.tweets[1].splice(0, 0, tweet);
+      }
+
       if (this.mostNegative.dominantEmotion.score < dominantEmotion.score) {
         this.mostNegative = tweet;
         this.mostNegative.dominantEmotion = dominantEmotion;
       }
 
+      if (this.influentialNegative.retweet_count + this.influentialNegative.favorite_count < incomingTweet.retweet_count + incomingTweet.favorite_count) {
+        this.influentialNegative = incomingTweet;
+      }
     }
     this.totalCount++;
   }
@@ -118,7 +139,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   newTracker(searchStr) {
-    console.log(searchStr);
     this.resetCategories();
     this.api.stopStream();
     this.tweets = [[], [], []];
@@ -134,9 +154,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }
       else
         this.addNewTweet(newTweet);
-
-      console.log(newTweet)
-
     });
 
   }
