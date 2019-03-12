@@ -102,7 +102,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.categories[0]++;
       this.tweets[0].splice(0, 0, tweet);
       if (this.mostPositive.dominantEmotion.score < dominantEmotion.score) {
-        this.mostPositive = tweet;
+        this.mostPositive = incomingTweet;
         this.mostPositive.dominantEmotion = dominantEmotion;
       }
       if (this.influentialPositive.retweet_count + this.influentialPositive.favorite_count < incomingTweet.retweet_count + incomingTweet.favorite_count) {
@@ -120,7 +120,7 @@ export class AppComponent implements OnInit, OnDestroy {
       }
 
       if (this.mostNegative.dominantEmotion.score < dominantEmotion.score) {
-        this.mostNegative = tweet;
+        this.mostNegative = incomingTweet;
         this.mostNegative.dominantEmotion = dominantEmotion;
       }
 
